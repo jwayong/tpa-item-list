@@ -1,6 +1,5 @@
 <link rel="import" href="tpa-list-item.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../paper-menu/paper-menu.html">
 <link rel="import" href="../tpa-styles/tpa-styles.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
@@ -63,7 +62,6 @@
             {{group.title}}
           </paper-item>
           <paper-card style="width:100%;padding:0px;margin-bottom:20px">
-              <paper-menu style="background-color:white;padding:0">
                   <template as="item" is="dom-repeat" items="{{group.items}}">
                       <tpa-list-item
                         is-swipe="{{isSwipe}}"
@@ -71,7 +69,6 @@
                         name="{{item.name}}">
                       </tpa-list-item>
                   </template>
-              </paper-menu>
           </paper-card>
         </template>
     </template>
