@@ -20,23 +20,23 @@
                       <span hidden$="{{!isRight}}"  on-click="resetSwipe">Undo</span>
                     </div>
                 </paper-item>
-                <paper-item content
-                            class="content"
-                            style="background-color:white">
-                    <div class="row-icon">
-                        <iron-icon on-mouseover="iconHover" icon="tpa:home"></iron-icon>
-                    </div>
-                    <div class="row-content" style="margin-left:15px">
-                      <div>{{name}}</div>
-                      <div class="subtext">This is sub text</div>
-                    </div>
-                    <div class="row-end">$10.00</div>
-                    <div id="rowActions" class="row-action">
-                        <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
-                        <paper-icon-button icon="tpa:email"></paper-icon-button>
-                        <paper-icon-button icon="av:repeat"></paper-icon-button>
-                    </div>
-                </paper-item>
+                <div content class="content">
+                  <paper-item>
+                      <div class="row-icon">
+                          <iron-icon on-mouseover="iconHover" icon="tpa:home"></iron-icon>
+                      </div>
+                      <div class="row-content" style="margin-left:15px">
+                        <div>{{name}}</div>
+                        <div class="subtext">This is sub text</div>
+                      </div>
+                      <div class="row-end">$10.00</div>
+                      <div id="rowActions" class="row-action">
+                          <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
+                          <paper-icon-button icon="tpa:email"></paper-icon-button>
+                          <paper-icon-button icon="av:repeat"></paper-icon-button>
+                      </div>
+                  </paper-item>
+                </div>
             </paper-swipe>
         </div>
     </template>

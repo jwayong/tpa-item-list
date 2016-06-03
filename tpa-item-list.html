@@ -34,6 +34,10 @@
           --iron-icon-width:40px;
           --iron-icon-height:40px;
         }
+
+        .group-title {
+          color:var(--ing-grey-500)
+        }
       </style>
       <paper-dialog
         id="optionDialog"
@@ -53,6 +57,9 @@
 
         </paper-dialog>
         <template as="group" is="dom-repeat" items="{{groups}}">
+          <paper-item class="group-title">
+            {{group.title}}
+          </paper-item>
           <paper-card style="width:100%;padding:0px;margin-bottom:20px">
               <paper-menu style="background-color:white;padding:0">
                   <template as="item" is="dom-repeat" items="{{group.items}}">
@@ -71,15 +78,24 @@
                     value: function(){
                         return [
                         {
+                            title:"May 2nd",
                             items:[
                                 {
                                     name:"Transaction 1"
                                 },
                                 {
                                     name:"Transaciton 2"
-                                }]
+                                },
+                                {
+                                  name:"Transaction 1"
+                                },
+                                {
+                                  name:"Transaciton 2"
+                                }
+                            ]
                         },
                         {
+                            title: "May 1st",
                             items:[
                                 {
                                     name:"Transaction 3"
@@ -89,6 +105,7 @@
                                 }]
                         },
                         {
+                            title: "April 30th",
                             items:[
                                 {
                                     name:"Transaction 5"
