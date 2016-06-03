@@ -1,0 +1,23 @@
+{
+  "name": "tpa-item-list",
+  "homepage": "https://github.com/ING-Group/tpa-item-list",
+  "authors": [
+    "joshjb84@hotmail.com <joshjb84@hotmail.com>"
+  ],
+  "description": "Element used to display a list of items.",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper-item": "PolymerElements/paper-item#^1.2.1",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.8",
+    "paper-menu": "PolymerElements/paper-menu#^1.2.2",
+    "paper-card": "PolymerElements/paper-card#^1.1.1"
+  }
+}
