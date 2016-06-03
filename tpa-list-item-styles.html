@@ -6,16 +6,8 @@
         background-color:var(--primary-color);
       }
 
-      .underlay iron-icon {
-        --iron-icon-fill-color:white;
-      }
-
       .content {
         color: black;
-      }
-
-      .content iron-icon{
-        --iron-icon-fill-color:var(--primary-color);
       }
 
       .item-container {
@@ -64,13 +56,27 @@
         display:block;
       }
 
-      .row-action iron-icon{
+      .row-action paper-icon-button{
         --iron-icon-fill-color:var(--ing-grey-800)
+      }
+
+      .row-action paper-icon-button.flagged{
+        --iron-icon-fill-color:var(--primary-color)
       }
 
       .subtext{
         color:var(--primary-color)
       }
+
+      .underlay iron-icon {
+        --iron-icon-fill-color:white;
+      }
+
+
+      .content iron-icon{
+        --iron-icon-fill-color:var(--primary-color);
+      }
+
     </style>
   </template>
 </dom-module>

@@ -6,17 +6,19 @@
 <link rel="import" href="../paper-swipe/paper-swipe.html">
 <link rel="import" href="tpa-list-item-styles.html">
 <dom-module id="tpa-list-item">
-
     <template>
         <style include="tpa-list-item-styles"></style>
         <div class="item-container">
-            <paper-swipe id="swipe" peek-offset="-24">
+            <paper-swipe id="swipe" peek-offset="-24" on-edge="hitEdge">
                 <paper-item class="underlay" underlay>
                     <div class="row-icon">
-                        <iron-icon icon="check"></iron-icon>
+                        <iron-icon hidden$="{{isLeft}}" icon="check" class="white"></iron-icon>
                     </div>
                     <div class="row-content"></div>
-                    <span class="row-action" on-click="resetSwipe">Undo</span>
+                    <div class="row-action" >
+                      <iron-icon class="white" hidden$="{{isRight}}" icon="tpa:menu2"></iron-icon>
+                      <span hidden$="{{!isRight}}"  on-click="resetSwipe">Undo</span>
+                    </div>
                 </paper-item>
                 <paper-item content
                             class="content"
@@ -30,9 +32,9 @@
                     </div>
                     <div class="row-end">$10.00</div>
                     <div id="rowActions" class="row-action">
-                        <iron-icon icon="flag"></iron-icon>
-                        <iron-icon icon="tpa:email"></iron-icon>
-                        <iron-icon icon="av:repeat"></iron-icon>
+                        <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
+                        <paper-icon-button icon="tpa:email"></paper-icon-button>
+                        <paper-icon-button icon="av:repeat"></paper-icon-button>
                     </div>
                 </paper-item>
             </paper-swipe>
@@ -40,15 +42,45 @@
     </template>
     <script>
         Polymer({
-            is: "tpa-list-item",
-            properties:{
-              name:{
-                  type: String
-              }
+          is: "tpa-list-item",
+          properties:{
+            name:{
+                type: String
             },
-            resetSwipe:function(e){
-              this.$.swipe.resetPosition();
+            isRight:{
+              type:Boolean,
+              value:false
+            },
+            isLeft:{
+              type:Boolean,
+              value:false
+            },
+            flagged:{
+              type:Boolean,
+              value:false
             }
+          },
+          resetSwipe:function(e){
+            this.isRight = false;
+            this.isLeft = false;
+            this.$.swipe.resetPosition();
+          },
+          hitEdge:function(){
+            var leftPos = this.querySelector(".content").getBoundingClientRect().left;
+
+            if(leftPos > 0){
+              this.isRight = true;
+            } else {
+              this.isLeft = true;
+              this.fire("swipedleft");
+            }
+          },
+          _handleFlag:function(){
+            this.flagged = !this.flagged;
+          },
+          _computeActionIconClass:function(flagged){
+            return flagged ? "flagged" : "";
+          }
         })
     </script>
 </dom-module>

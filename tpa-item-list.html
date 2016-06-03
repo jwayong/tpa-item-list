@@ -2,20 +2,64 @@
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-menu/paper-menu.html">
 <link rel="import" href="../tpa-styles/tpa-styles.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/av-icons.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../tpa-icons/tpa-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-button/paper-button.html">
 <!--
 @pseudoElement tpa-item-list
 @demo demo/index.html
 -->
 <dom-module id="tpa-item-list">
     <template>
+      <style>
+        paper-dialog{
+          width:200px
+        }
+        iron-icon{
+          --iron-icon-fill-color:var(--ing-grey-800)
+        }
+        paper-button{
+          display:block;
+          height:60px;
+          padding-left:20px;
+        }
+
+        paper-button iron-icon{
+          margin-right:20px;
+          --iron-icon-width:40px;
+          --iron-icon-height:40px;
+        }
+      </style>
+      <paper-dialog
+        id="optionDialog"
+        with-backdrop>
+          <paper-button>
+            <iron-icon icon="flag"></iron-icon>
+            Flag
+          </paper-button>
+          <paper-button>
+            <iron-icon icon="tpa:email"></iron-icon>
+            Forward
+          </paper-button>
+          <paper-button>
+            <iron-icon icon="av:repeat"></iron-icon>
+            Repeat
+          </paper-button>
+
+        </paper-dialog>
         <template as="group" is="dom-repeat" items="{{groups}}">
-            <paper-card style="width:100%;padding:0px;margin-bottom:20px">
-                <paper-menu style="background-color:white;padding:0">
-                    <template as="item" is="dom-repeat" items="{{group.items}}">
-                        <tpa-list-item name="{{item.name}}"></tpa-list-item>
-                    </template>
-                </paper-menu>
-            </paper-card>
+          <paper-card style="width:100%;padding:0px;margin-bottom:20px">
+              <paper-menu style="background-color:white;padding:0">
+                  <template as="item" is="dom-repeat" items="{{group.items}}">
+                      <tpa-list-item on-swipedleft="_handleItemSwipedLeft" name="{{item.name}}"></tpa-list-item>
+                  </template>
+              </paper-menu>
+          </paper-card>
         </template>
     </template>
     <script>
@@ -55,6 +99,9 @@
                         }
                     ]}
                 }
+            },
+            _handleItemSwipedLeft: function(){
+              this.$.optionDialog.open();
             }
         });
     </script>
