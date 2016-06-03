@@ -10,6 +10,7 @@
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
 <!--
 @pseudoElement tpa-item-list
 @demo demo/index.html
@@ -39,6 +40,7 @@
           color:var(--ing-grey-500)
         }
       </style>
+      <iron-media-query query="(max-width: 800px)" query-matches="{{isSwipe}}"></iron-media-query>
       <paper-dialog
         id="optionDialog"
         with-backdrop>
@@ -63,7 +65,11 @@
           <paper-card style="width:100%;padding:0px;margin-bottom:20px">
               <paper-menu style="background-color:white;padding:0">
                   <template as="item" is="dom-repeat" items="{{group.items}}">
-                      <tpa-list-item on-swipedleft="_handleItemSwipedLeft" name="{{item.name}}"></tpa-list-item>
+                      <tpa-list-item
+                        is-swipe="{{isSwipe}}"
+                        on-swipedleft="_handleItemSwipedLeft"
+                        name="{{item.name}}">
+                      </tpa-list-item>
                   </template>
               </paper-menu>
           </paper-card>
@@ -73,49 +79,53 @@
         Polymer({
             is:"tpa-item-list",
             properties:{
-                groups:{
-                    type:Array,
-                    value: function(){
-                        return [
-                        {
-                            title:"May 2nd",
-                            items:[
-                                {
-                                    name:"Transaction 1"
-                                },
-                                {
-                                    name:"Transaciton 2"
-                                },
-                                {
+              isSwipe:{
+                type:Boolean,
+                notify:true
+              },
+              groups:{
+                  type:Array,
+                  value: function(){
+                      return [
+                      {
+                          title:"May 2nd",
+                          items:[
+                              {
                                   name:"Transaction 1"
-                                },
-                                {
+                              },
+                              {
                                   name:"Transaciton 2"
-                                }
-                            ]
-                        },
-                        {
-                            title: "May 1st",
-                            items:[
-                                {
-                                    name:"Transaction 3"
-                                },
-                                {
-                                    name:"Transaciton 4"
-                                }]
-                        },
-                        {
-                            title: "April 30th",
-                            items:[
-                                {
-                                    name:"Transaction 5"
-                                },
-                                {
-                                    name:"Transaciton 6"
-                                }]
-                        }
-                    ]}
-                }
+                              },
+                              {
+                                name:"Transaction 1"
+                              },
+                              {
+                                name:"Transaciton 2"
+                              }
+                          ]
+                      },
+                      {
+                          title: "May 1st",
+                          items:[
+                              {
+                                  name:"Transaction 3"
+                              },
+                              {
+                                  name:"Transaciton 4"
+                              }]
+                      },
+                      {
+                          title: "April 30th",
+                          items:[
+                              {
+                                  name:"Transaction 5"
+                              },
+                              {
+                                  name:"Transaciton 6"
+                              }]
+                      }
+                  ]}
+              }
             },
             _handleItemSwipedLeft: function(){
               this.$.optionDialog.open();

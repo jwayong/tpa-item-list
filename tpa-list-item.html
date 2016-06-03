@@ -9,7 +9,11 @@
     <template>
         <style include="tpa-list-item-styles"></style>
         <div class="item-container">
-            <paper-swipe id="swipe" peek-offset="-24" on-edge="hitEdge">
+            <paper-swipe
+              id="swipe"
+              peek-offset="-36"
+              on-edge="hitEdge"
+              disable-swipe="{{!isSwipe}}">
                 <paper-item class="underlay" underlay>
                     <div class="row-icon">
                         <iron-icon hidden$="{{isLeft}}" icon="check" class="white"></iron-icon>
@@ -30,7 +34,7 @@
                         <div class="subtext">This is sub text</div>
                       </div>
                       <div class="row-end">$10.00</div>
-                      <div id="rowActions" class="row-action">
+                      <div id="rowActions" class$="{{_computeRowActionsClass(isSwipe)}}">
                           <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
                           <paper-icon-button icon="tpa:email"></paper-icon-button>
                           <paper-icon-button icon="av:repeat"></paper-icon-button>
@@ -58,6 +62,10 @@
             flagged:{
               type:Boolean,
               value:false
+            },
+            isSwipe:{
+              type:Boolean,
+              observer:"_swipeChanged"
             }
           },
           resetSwipe:function(e){
@@ -80,6 +88,15 @@
           },
           _computeActionIconClass:function(flagged){
             return flagged ? "flagged" : "";
+          },
+          _computeRowActionsClass: function(isSwipe){
+            var cssClasses = "row-action";
+            cssClasses += isSwipe ? " swipe-enabled" : "";
+
+            return cssClasses;
+          },
+          _swipeChanged:function(){
+            this.$.swipe.resetPosition();
           }
         })
     </script>
