@@ -2,63 +2,13 @@
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../tpa-icons/tpa-icons.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/av-icons.html">
 <link rel="import" href="../paper-swipe/paper-swipe.html">
+<link rel="import" href="tpa-list-item-styles.html">
 <dom-module id="tpa-list-item">
-    <style>
-        .underlay {
-            background-color:var(--primary-color);
-        }
 
-        .underlay iron-icon {
-            --iron-icon-fill-color:white;
-        }
-
-        .content {
-            color: black;
-        }
-
-        .content iron-icon{
-            --iron-icon-fill-color:var(--primary-color);
-        }
-
-        .item-container {
-            height:50px;
-        }
-
-        paper-item{
-            color:white
-        }
-
-        paper-swipe{
-            width:100%;
-            height:100%;
-            overflow:hidden;
-        }
-
-        .row-icon{
-            flex-grow:1;
-
-        }
-
-        .row-content{
-            flex-grow:4;
-        }
-
-        .row-end{
-            flex-grow:2;
-            text-align:right;
-            cursor:pointer;
-        }
-
-        .content .row-action{
-            position:absolute;
-            right:10px;
-            top:15px;
-            background-color:white;
-            display:none;
-        }
-    </style>
     <template>
+        <style include="tpa-list-item-styles"></style>
         <div class="item-container">
             <paper-swipe id="swipe" peek-offset="-24">
                 <paper-item class="underlay" underlay>
@@ -70,18 +20,19 @@
                 </paper-item>
                 <paper-item content
                             class="content"
-                            style="background-color:white"
-                            on-mouseover="itemHover"
-                            on-mouseout="itemHoverOut">
+                            style="background-color:white">
                     <div class="row-icon">
                         <iron-icon on-mouseover="iconHover" icon="tpa:home"></iron-icon>
                     </div>
-                    <div class="row-content" style="margin-left:15px">{{name}}</div>
+                    <div class="row-content" style="margin-left:15px">
+                      <div>{{name}}</div>
+                      <div class="subtext">This is sub text</div>
+                    </div>
                     <div class="row-end">$10.00</div>
                     <div id="rowActions" class="row-action">
                         <iron-icon icon="flag"></iron-icon>
-                        <iron-icon icon="flag"></iron-icon>
-                        <iron-icon icon="flag"></iron-icon>
+                        <iron-icon icon="tpa:email"></iron-icon>
+                        <iron-icon icon="av:repeat"></iron-icon>
                     </div>
                 </paper-item>
             </paper-swipe>
@@ -91,22 +42,12 @@
         Polymer({
             is: "tpa-list-item",
             properties:{
-                name:{
-                    type: String
-                }
-            },
-            iconHover:function(e){
-                console.log(e);
-
+              name:{
+                  type: String
+              }
             },
             resetSwipe:function(e){
-                this.$.swipe.resetPosition();
-            },
-            itemHover: function(){
-                this.$.rowActions.style.display = 'block';
-            },
-            itemHoverOut: function(){
-                this.$.rowActions.style.display = 'none';
+              this.$.swipe.resetPosition();
             }
         })
     </script>

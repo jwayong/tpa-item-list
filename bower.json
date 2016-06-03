@@ -19,6 +19,14 @@
     "iron-icon": "PolymerElements/iron-icon#^1.0.8",
     "paper-menu": "PolymerElements/paper-menu#^1.2.2",
     "paper-card": "PolymerElements/paper-card#^1.1.1",
-    "paper-swipe": "https://github.com/motss/paper-swipe.git#^1.0.2"
+    "paper-swipe": "https://github.com/motss/paper-swipe.git#^1.0.2",
+    "tpa-styles": "https://github.com/ING-Group/tpa-styles.git",
+    "tpa-icons": "https://github.com/ING-Group/tpa-icons.git",
+    "tpa-font": "https://github.com/ING-Group/tpa-font.git"
+  },
+  "devDependencies": {
+    "test-fixture": "PolymerElements/test-fixture#^1.1.1",
+    "web-component-tester": "Polymer/web-component-tester#^4.2.2",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.6"
   }
 }
