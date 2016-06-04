@@ -40,6 +40,7 @@
         }
       </style>
       <iron-media-query query="(max-width: 800px)" query-matches="{{isSwipe}}"></iron-media-query>
+      <!-- Issue https://github.com/PolymerElements/polymer-starter-kit/issues/154
       <paper-dialog
         id="optionDialog"
         with-backdrop>
@@ -57,6 +58,7 @@
           </paper-button>
 
         </paper-dialog>
+      -->
         <template as="group" is="dom-repeat" items="{{groups}}">
           <paper-item class="group-title">
             {{group.title}}
@@ -125,7 +127,8 @@
               }
             },
             _handleItemSwipedLeft: function(){
-              this.$.optionDialog.open();
+              /* this.$.optionDialog.open(); //issue: https://github.com/PolymerElements/polymer-starter-kit/issues/154 */
+              this.fire('iron-signal',{name: 'transaction-swipe', data: null});
             }
         });
     </script>
