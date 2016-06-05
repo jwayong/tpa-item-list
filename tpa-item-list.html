@@ -1,6 +1,7 @@
 <link rel="import" href="tpa-list-item.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../tpa-styles/tpa-styles.html">
+<link rel="import" href="../tpa-ajax/tpa-ajax.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/av-icons.html">
@@ -39,6 +40,7 @@
           color:var(--ing-grey-500)
         }
       </style>
+      <tpa-ajax auto url="/api/inbox/{{page}}" last-response="{{groups}}"></tpa-ajax>
       <iron-media-query query="(max-width: 800px)" query-matches="{{isSwipe}}"></iron-media-query>
       <!-- Issue https://github.com/PolymerElements/polymer-starter-kit/issues/154
       <paper-dialog
@@ -82,8 +84,14 @@
                 type:Boolean,
                 notify:true
               },
+              page: {
+                type: String,
+                notify: true
+              },
               groups:{
                   type:Array,
+                  notify: true
+                  /*
                   value: function(){
                       return [
                       {
@@ -123,7 +131,7 @@
                                   name:"Transaciton 6"
                               }]
                       }
-                  ]}
+                  ]}*/
               }
             },
             _handleItemSwipedLeft: function(){
