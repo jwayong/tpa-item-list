@@ -40,7 +40,8 @@
           color:var(--ing-grey-500)
         }
       </style>
-      <tpa-ajax auto url="/api/inbox/{{page}}" last-response="{{groups}}"></tpa-ajax>
+
+      <tpa-ajax auto url="/api/inbox/{{page}}" handle-as="json" last-response="{{groups}}"></tpa-ajax>
       <iron-media-query query="(max-width: 800px)" query-matches="{{isSwipe}}"></iron-media-query>
       <!-- Issue https://github.com/PolymerElements/polymer-starter-kit/issues/154
       <paper-dialog
