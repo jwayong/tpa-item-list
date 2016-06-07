@@ -39,7 +39,9 @@
                         <div>{{name}}</div>
                         <div class="subtext">This is sub text</div>
                       </div>
-                      <div class="row-end">$10.00</div>
+                      <template is="dom-if" if="{{!isMessage}}">
+                        <div class="row-end">$10.00</div>
+                      </template>
                       <div id="rowActions" class$="{{_computeRowActionsClass(isSwipe)}}">
                           <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
                           <paper-icon-button icon="tpa:email"></paper-icon-button>
@@ -62,6 +64,10 @@
           properties:{
             name:{
                 type: String
+            },
+            isMessage: {
+              type: Boolean,
+              value: false
             },
             isRight:{
               type:Boolean,

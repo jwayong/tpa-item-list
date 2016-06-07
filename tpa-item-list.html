@@ -58,7 +58,8 @@
           <tpa-list-item
             is-swipe="{{isSwipe}}"
             on-swipedleft="_handleItemSwipedLeft"
-            name="{{item.name}}">
+            name="{{item.name}}"
+            is-message="[[isMessage]]">
           </tpa-list-item>
         </template>
       </paper-card>
@@ -79,6 +80,11 @@
         groups: {
           type: Array,
           notify: true
+        },
+        isMessage: {
+          type: Boolean,
+          notify: true,
+          value: false
         }
       },
 
