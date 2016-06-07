@@ -5,6 +5,9 @@
 <link rel="import" href="../iron-icons/av-icons.html">
 <link rel="import" href="../paper-swipe/paper-swipe.html">
 <link rel="import" href="tpa-list-item-styles.html">
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../neon-animation/neon-animations.html">
+
 <dom-module id="tpa-list-item">
     <template>
         <style include="tpa-list-item-styles"></style>
@@ -38,6 +41,7 @@
                           <paper-icon-button class$="{{_computeActionIconClass(flagged)}}" on-click="_handleFlag" icon="flag"></paper-icon-button>
                           <paper-icon-button icon="tpa:email"></paper-icon-button>
                           <paper-icon-button icon="av:repeat"></paper-icon-button>
+                          <paper-icon-button icon="tpa:check" on-tap="_handleDoneAction"></paper-icon-button>
                       </div>
                   </paper-item>
                 </div>
@@ -47,6 +51,11 @@
     <script>
         Polymer({
           is: "tpa-list-item",
+          behaviors: [Polymer.NeonAnimationRunnerBehavior],
+          listeners: {
+            // this event is fired when the animation finishes
+            'neon-animation-finish': '_onNeonAnimationFinish'
+          },
           properties:{
             name:{
                 type: String
@@ -66,7 +75,24 @@
             isSwipe:{
               type:Boolean,
               observer:"_swipeChanged"
+            },
+            animationConfig: {
+              value: function() {
+                return {
+                  name: 'fade-out-animation',
+                  node: this
+                }
+              }
             }
+          },
+          _handleDoneAction: function() {
+            this.animate();
+          },
+          animate: function() {
+            this.playAnimation();
+          },
+          _onNeonAnimationFinish: function() {
+            this.hidden = true;
           },
           resetSwipe:function(e){
             this.isRight = false;
@@ -75,9 +101,10 @@
           },
           hitEdge:function(){
             var leftPos = this.querySelector(".content").getBoundingClientRect().left;
-
             if(leftPos > 0){
               this.isRight = true;
+              this.animate();
+
             } else {
               this.isLeft = true;
               this.fire("swipedleft");
