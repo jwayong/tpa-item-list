@@ -1,0 +1,24 @@
+FORMAT: 1A
+
+# InboxApi
+
+Some API Calls, for using the Inbox Data
+
+# Group Inbox
+
+## URL [/api/inbox/sent]
+
+### Get all Inbox Data [GET]
+
++ Response 200 (application/json)
+
+    [
+      {
+          "title": "May 2nd",
+          "items":[
+              {
+                  "name":"Re: I would like to find out more on my home loan application progress"
+              }
+          ]
+      }
+    ]
